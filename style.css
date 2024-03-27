@@ -1,0 +1,31 @@
+/* Resetting default margin and padding */
+body, h1, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Setting font family and color */
+body {
+    font-family: Arial, sans-serif;
+    color: #d01818;
+}
+
+/* Centering the content */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Styling the header */
+h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* Styling the paragraph */
+p {
+    font-size: 1rem;
+    line-height: 1.5;
+}
