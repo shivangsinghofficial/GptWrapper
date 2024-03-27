@@ -1,6 +1,6 @@
 const { Configuration, OpenAI } = require('openai');
 
-const apiKey = "";
+const ss = "";
 
 async function interactWithGpt(prompt) {
     try {
