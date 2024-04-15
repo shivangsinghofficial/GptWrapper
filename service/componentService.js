@@ -3,7 +3,7 @@ const pathModule = require('path');
 const {executeCommand} = require('../commandExecutor');
 const {writeTofile, readFile, deleteFile, createDirectory, checkFileExists} = require('../helper/fileWriter');
 const Utils = require('../helper/util');
-const {saveSourceData} = require('./crwalerService');
+const {saveSourceData} = require('./crawlerService');
 const componentLib = 'componentLib';
 
 async function extractComponent(srcUrl, componentName) {
