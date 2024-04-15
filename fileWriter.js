@@ -12,6 +12,15 @@ function writeTofile(fileName, fileContent) {
     });
 }
 
+function checkFileExists(filePath) {
+    try {
+      fs.accessSync(filePath, fs.constants.F_OK);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
 async function readFile(fileName) {
     try {
         const data = await fsPromise.readFile(fileName, 'utf8');
@@ -29,4 +38,11 @@ function deleteFile(filePath) {
     });
 }
 
-module.exports = {writeTofile, readFile, deleteFile};
+function createDirectory(directoryName) {
+    const directoryPath = './' + `${directoryName}`;
+    if (!fs.existsSync(directoryPath)) {
+        fs.mkdirSync(directoryPath, { recursive: true });
+    }
+}
+
+module.exports = {writeTofile, readFile, deleteFile, checkFileExists, createDirectory};
