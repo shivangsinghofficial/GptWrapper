@@ -17,6 +17,14 @@ ${sourceCode}
     return prompt.trim();
     }
 
+    static getJsx(code) {
+        const prompt = `
+Convert to jsx
+${code}   
+        `;
+        return prompt.trim();
+    }
+
     static extractReturnContent(str) {
         let startIndex = str.indexOf('<');
         let lastIndex = str.lastIndexOf('>');

@@ -18,9 +18,12 @@ async function extractComponent(srcUrl, componentName) {
     const response = await interactWithGpt(prompt);
     const reactContent = response.content;
     console.log("REACT CONTENT: ", reactContent);
-    const jsxCode = JSON.parse(JSON.stringify(reactContent));
-    // console.log("JSX Code: ", jsxCode);
-    return [cssLinks, jsxCode];
+    const jsxCodePrompt = Utils.getJsx(JSON.parse(JSON.stringify(reactContent)));
+    console.log("JSX Prompt: ", jsxCodePrompt);
+    const jsxResponse = await interactWithGpt(jsxCodePrompt);
+    const jsxContent = jsxResponse.content
+    console.log("JSX Code: ", jsxContent);
+    return [cssLinks, jsxContent];
 }
 
 async function scrapeAndExtractComponent(srcUrl, componentName) {
@@ -42,7 +45,9 @@ async function extractCSSLinks(srcUrl, html) {
     let match;
 
     while ((match = pattern.exec(html)) !== null) {
-        matches.push(srcUrl + match[1]);
+        if (match[1] != "/css/plugins/print-min.css") {
+            matches.push(srcUrl + match[1]);
+        }
     }
 
     return matches;
