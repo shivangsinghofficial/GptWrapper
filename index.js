@@ -15,8 +15,8 @@ app.post('/api/v1/extract-component', async (req, res) => {
     
     console.log("request url = ", srcUrl);
     try {
-        const extractedComponent = await scrapeAndExtractComponent(srcUrl, componentName);
-        res.status(200).json({ componentCode: extractedComponent });
+        const results = await scrapeAndExtractComponent(srcUrl, componentName);
+        res.status(200).json({ cssLinks: results[0], componentCode: results[1] });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

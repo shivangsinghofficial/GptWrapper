@@ -12,7 +12,7 @@ Source Code:
 
 ${sourceCode}
 
-Only provide the extracted code in prettified format of the specified component, No other text`;
+Only provide the extracted code in prettified format of the specified component, No other text not even extra html texts`;
 
     return prompt.trim();
     }
