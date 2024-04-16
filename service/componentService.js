@@ -15,17 +15,12 @@ async function extractComponent(srcUrl, componentName) {
         return links;
     });
     const prompt = Utils.getCreateStaticComponentPrompt(componentName, srcPageCode);
-    // console.log("Prompt" + prompt);
     const response = await interactWithGpt(prompt);
-    const content = JSON.parse(JSON.stringify(response.content));
-    // createDirectory(componentLib);
-    // const componentFileName = componentName + '.html';
-    // const componentFilePath = pathModule.join(__dirname,  componentFileName);
-    // if (checkFileExists(componentFilePath)) {
-    //     await deleteFile(componentFilePath);
-    // }
-    // writeTofile(componentFilePath, content);
-    return [cssLinks, content];
+    const reactContent = response.content;
+    console.log("REACT CONTENT: ", reactContent);
+    const jsxCode = JSON.parse(JSON.stringify(reactContent));
+    // console.log("JSX Code: ", jsxCode);
+    return [cssLinks, jsxCode];
 }
 
 async function scrapeAndExtractComponent(srcUrl, componentName) {
