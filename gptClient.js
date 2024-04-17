@@ -10,6 +10,8 @@ async function interactWithGpt(prompt) {
         const chatCompletion = await openai.chat.completions.create({
             model: 'gpt-3.5-turbo',
             messages: [{ role: 'user', content: prompt }],
+            temperature: 0,
+            top_p: 0.001
           });
         console.log("Response below");
         console.log(chatCompletion.choices[0].message);

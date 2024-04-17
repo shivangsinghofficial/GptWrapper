@@ -21,7 +21,8 @@ async function extractComponent(srcUrl, componentName) {
     const jsxCodePrompt = Utils.getJsx(JSON.parse(JSON.stringify(reactContent)));
     console.log("JSX Prompt: ", jsxCodePrompt);
     const jsxResponse = await interactWithGpt(jsxCodePrompt);
-    const jsxContent = jsxResponse.content
+    let jsxContent = jsxResponse.content;
+    jsxContent = appendBaseUrlToImages(jsxContent, srcUrl);
     console.log("JSX Code: ", jsxContent);
     return [cssLinks, jsxContent];
 }
@@ -51,6 +52,22 @@ async function extractCSSLinks(srcUrl, html) {
     }
 
     return matches;
+}
+
+function appendBaseUrlToImages(jsxCode, baseUrl) {
+    const imgSrcRegex = /<img[^>]+src=["']([^"']+)["']/g;
+
+    // Replace src attributes with the base URL appended
+    const modifiedJsxCode = jsxCode.replace(imgSrcRegex, (match, src) => {
+        // If src doesn't start with http, assume it's a relative path and append base URL
+        if (!src.startsWith('http')) {
+            return `<img src="${baseUrl}${src}"`;
+        } else {
+            return match; // Return unchanged if src already has a base URL
+        }
+    });
+
+    return modifiedJsxCode;
 }
 
 
